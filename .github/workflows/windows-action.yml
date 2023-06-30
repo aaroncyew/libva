@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sys: [mingw64, msvc]
+        sys: [msvc]
         architecture: [x86_64]
     steps:
       - uses: actions/checkout@v3
