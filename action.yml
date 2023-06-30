@@ -24,16 +24,5 @@ msvc:
   - run: pip install meson
 runs:
   using "composite"
-  needs: ${{ inputs.sys }}
   steps:
-    - name: Checkout LibVA
-      uses: actions/checkout@v3
-    - name: Enter DevShell
-      shell: pwsh
-      run: .github\workflows\EnterDevShell.ps1 ${{ inputs.architecture }}
-    - name: Configure 
-      run: meson setup _build -D -werror=true
-    - name: Build
-      run: meson compile -C _build
-    - name: Install
-      run: meson install -C _build
+    - run: echo Running system detected as ${{inputs.sys}}
