@@ -1,7 +1,7 @@
 name: Libva Windows Build
 
 inputs:
-  system:
+  sys:
     description: Libva Windows Systems Support
     required: true
     default: mingw64
@@ -25,7 +25,7 @@ jobs:
         python-version: '3.x'
     - run: pip install meson
   steps:
-    needs: ${{inputs.system}}
+    needs: ${{inputs.sys}}
     - name: Checkout LibVA
       uses: actions/checkout@v3
       
