@@ -5,6 +5,10 @@ inputs:
     description: Libva Windows Systems Support
     required: true
     default: mingw64
+  architecture:
+    description: Libva Supported architectures
+    required: true
+    default: x86_64
 jobs:
   using: "composite"
   steps:
