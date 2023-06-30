@@ -1,16 +1,16 @@
-name: Libva Windows
+name: Libva Windows Build
 on:
   push:
     paths:
       - .github/workflows/windows-action.yml      
 jobs:
   libva:
-    name: Libva Build
+    name: Build
     runs-on: windows-2022
     strategy:
       fail-fast: false
       matrix:
-        sys: [msvc]
+        sys: [mingw64, msvc]
         architecture: [x86_64]
     steps:
       - uses: actions/checkout@v3
