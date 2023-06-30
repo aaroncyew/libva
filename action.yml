@@ -25,10 +25,10 @@ jobs:
         python-version: '3.x'
     - run: pip install meson
   steps:
+    needs: ${{inputs.system}}
     - name: Checkout LibVA
       uses: actions/checkout@v3
-    - run: echo "Check Libva Support"
-      needs: ${{inputs.system}}
+      
     - name: Enter DevShell
       shell: pwsh
       run: .github\workflows\EnterDevShell.ps1 ${{ inputs.architecture }}
