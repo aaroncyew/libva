@@ -15,6 +15,7 @@ jobs:
     - name: Checkout LibVA
       uses: actions/checkout@v3
     - name: Setup MSYS2
+      run: echo "Run MingW64 Step"
       if: ${{inputs.system == 'mingw64'}}
         uses: msys2/setup-msys2@v2
         with:
@@ -24,6 +25,7 @@ jobs:
             toolchain:p
             meson:p
     - name: Setup Python
+      run: echo "Run MSVC Step"
       if: ${{inputs.system == 'msvc'}}
         uses: actions/setup-python@v4
         with:
