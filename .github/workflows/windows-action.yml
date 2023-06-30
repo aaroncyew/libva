@@ -1,0 +1,19 @@
+name: Libva Windows
+on:
+  push:
+    paths:
+      - .github/workflows/windows-action.yml
+      
+jobs:
+  libva:
+    name: Libva Build
+    runs-on: windows-2022
+    strategy:
+      fail-fast: false
+      matrix:
+        sys: [mingw64, msvc]
+    steps:
+      - id: libva_compose
+        uses: lab-github/libva@libva-actions
+        with:
+          sys: ${{matrix.sys}}
