@@ -1,6 +1,6 @@
 name: Libva Windows Build
 
-inputs:
+outputs:
   sys:
     description: Libva Windows Systems Support
     required: true
@@ -25,7 +25,7 @@ msvc:
 runs:
   using "composite"
   steps:
-    needs: ${{inputs.sys}}
+    needs: ${{outputs.sys}}
     - name: Checkout LibVA
       uses: actions/checkout@v3
     - name: Enter DevShell
