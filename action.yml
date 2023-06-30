@@ -9,26 +9,25 @@ inputs:
     description: Libva Supported architectures
     required: true
     default: x86_64
-jobs:
-  using: "composite"
-  mingw64:
-    - uses: msys2/setup-msys2@v2
-      with:
-        msystem: mingw64
-        update: true
-        pacboy: >-
-          toolchain:p
-          meson:p
-  msvc:
-    - uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
-    - run: pip install meson
+mingw64:
+  - uses: msys2/setup-msys2@v2
+    with:
+    msystem: mingw64
+    update: true
+    pacboy: >-
+      toolchain:p
+      meson:p
+msvc:
+  - uses: actions/setup-python@v4
+    with:
+      python-version: '3.x'
+  - run: pip install meson
+runs:
+  using "composite"
   steps:
     needs: ${{inputs.sys}}
     - name: Checkout LibVA
       uses: actions/checkout@v3
-      
     - name: Enter DevShell
       shell: pwsh
       run: .github\workflows\EnterDevShell.ps1 ${{ inputs.architecture }}
