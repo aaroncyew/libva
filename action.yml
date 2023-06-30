@@ -1,0 +1,42 @@
+name: Libva Windows Build
+
+inputs:
+  sys:
+    description: Libva Windows Systems Support
+    required: true
+    default: mingw64
+jobs:
+  using: "composite"
+  steps:
+    - name: Checkout LibVA
+      uses: actions/checkout@v3
+    - name: Setup environment
+      if: ${{inputs.sys == 'msvc'}}
+        env: 
+          CC: gcc
+        defaults:
+          shell: msys2 {0}
+    - name: Setup MSYS2
+      if: ${{inputs.sys == 'mingw64'}}
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: ${{inputs.sys}}
+          update: true
+          pacboy: >-
+            toolchain:p
+            meson:p
+    - name: Setup Python
+      if: ${{inputs.sys == 'msvc'}}
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+        run: pip install meson
+    - name: Enter DevShell
+      shell: pwsh
+      run: .github\workflows\EnterDevShell.ps1 ${{ inputs.architecture }}
+    - name: Configure 
+      run: meson setup _build -D -werror=true
+    - name: Build
+      run: meson compile -C _build
+    - name: Install
+      run: meson install -C _build
